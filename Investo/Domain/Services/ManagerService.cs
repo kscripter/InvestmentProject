@@ -19,30 +19,46 @@ namespace Investo.Domain.Services
         }
 
 
-
-        public Manager AddManager(IManagerService manager)
+        public Manager AddManager(Manager manager)
         {
-            throw new NotImplementedException();
+            Manager manage = _managerRepository.AddManager(manager);
+            return manage;
         }
 
-        public bool CreateManager(string firstName, string middleName, string lastName, string email, string password, string checkPassword)
+        public void DeleteManager(int id)
         {
-            throw new NotImplementedException();
+            _managerRepository.DeleteManager(id);
         }
 
         public List<Manager> GetAll()
         {
-            throw new NotImplementedException();
+            return _managerRepository.GetAll();
         }
 
         public Manager GetManager(int id)
         {
-            throw new NotImplementedException();
+            return _managerRepository.GetManager(id);
         }
 
-        public Manager UpdateManager(Manager manager)
+        public Manager Login(string username, string password)
         {
-            throw new NotImplementedException();
+            var manager = _managerRepository.FindByEmail(username);
+            if (manager == null || manager.Password != password)
+            {
+                return null;
+            }
+
+            return manager;
         }
+
+        public Manager Update(Manager manager)
+        {
+            return _managerRepository.Update(manager);
+        }
+
+
+
+
+
     }
 }

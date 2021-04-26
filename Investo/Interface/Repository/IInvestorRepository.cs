@@ -9,17 +9,17 @@ namespace Investo.Interface.Repository
 
         public int CreateInvestor(Investor investor);
 
-        public Investor AddInvestor(Investor investor);
+
 
         public Investor FindByEmail(string email);
 
         public Investor GetDetails(int id);
 
-        public Investor FindById(int id);
-
-        public Investor Update(Investor investor);
-
         public Investor GetInvestor(int id);
+
+        public Investor FindById(int id);
+        public Investor AddInvestor(Investor investor);
+
 
         public List<Investor> GetAll();
 

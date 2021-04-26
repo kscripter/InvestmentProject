@@ -19,69 +19,132 @@ namespace Investo.Migrations
 
             modelBuilder.Entity("Investo.Models.Entities.Account", b =>
                 {
-                    b.Property<int>("InvestorId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("AccountNumber")
-                        .HasColumnType("text");
+                    b.Property<double>("AccountBalance")
+                        .HasColumnType("double");
 
                     b.Property<int>("AccountStatus")
                         .HasColumnType("int");
 
-                    b.HasKey("InvestorId");
+                    b.Property<string>("InvestorAccountNumber")
+                        .HasColumnType("text");
+
+                    b.Property<int>("InvestorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvestorId")
+                        .IsUnique();
 
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("Investo.Models.Entities.BankDetails", b =>
+            modelBuilder.Entity("Investo.Models.Entities.Admin", b =>
                 {
-                    b.Property<int>("InvestorId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("varchar(72)")
+                        .HasMaxLength(72);
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admins");
+                });
+
+            modelBuilder.Entity("Investo.Models.Entities.BankDetail", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("AccountName")
                         .HasColumnType("text");
 
-                    b.Property<int>("AccountNumber")
+                    b.Property<string>("AccountNumber")
+                        .HasColumnType("text");
+
+                    b.Property<int>("BankDetailId")
                         .HasColumnType("int");
 
                     b.Property<string>("BankName")
                         .HasColumnType("text");
 
-                    b.HasKey("InvestorId");
+                    b.Property<int>("InvestorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvestorId")
+                        .IsUnique();
 
                     b.ToTable("BankDetails");
                 });
 
-            modelBuilder.Entity("Investo.Models.Entities.InvestmentType", b =>
+            modelBuilder.Entity("Investo.Models.Entities.Investment", b =>
                 {
-                    b.Property<int>("InvestorId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Golden")
+                    b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InvestorId1")
+                    b.Property<int>("AmountReceived")
                         .HasColumnType("int");
 
-                    b.Property<int>("Mini")
+                    b.Property<string>("InvestmentType")
+                        .HasColumnType("text");
+
+                    b.Property<int>("InvestorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Royal")
+                    b.Property<int>("ManagerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Ruby")
+                    b.Property<int>("PendingReturns")
                         .HasColumnType("int");
 
-                    b.Property<int>("Silver")
+                    b.Property<int>("TotalInvestments")
                         .HasColumnType("int");
 
-                    b.HasKey("InvestorId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("InvestorId1");
+                    b.HasIndex("AccountId");
 
-                    b.ToTable("InvestmentTypes");
+                    b.HasIndex("InvestorId");
+
+                    b.HasIndex("ManagerId");
+
+                    b.ToTable("Investments");
                 });
 
             modelBuilder.Entity("Investo.Models.Entities.Investor", b =>
@@ -111,10 +174,16 @@ namespace Investo.Migrations
                     b.Property<int>("InvestmentDuration")
                         .HasColumnType("int");
 
+                    b.Property<string>("InvestmentType")
+                        .HasColumnType("text");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("varchar(255)")
                         .HasMaxLength(255);
+
+                    b.Property<int?>("ManagerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("MiddleName")
                         .IsRequired()
@@ -129,10 +198,15 @@ namespace Investo.Migrations
                         .HasColumnType("int")
                         .HasMaxLength(11);
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("text");
+
                     b.Property<string>("ReferralCode")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ManagerId");
 
                     b.ToTable("Investors");
                 });
@@ -141,6 +215,12 @@ namespace Investo.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Adminid")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -163,58 +243,220 @@ namespace Investo.Migrations
                         .HasColumnType("varchar(72)")
                         .HasMaxLength(72);
 
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Adminid");
 
                     b.ToTable("Managers");
                 });
 
-            modelBuilder.Entity("Investo.Models.Entities.Payment", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<int>("InvestorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
 
-                    b.Property<string>("ATMCard")
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("text");
 
-                    b.Property<string>("BankTransfer")
-                        .HasColumnType("text");
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(256)")
+                        .HasMaxLength(256);
 
-                    b.HasKey("InvestorId");
-
-                    b.ToTable("Payments");
-                });
-
-            modelBuilder.Entity("Investo.Models.Entities.TransactionHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("AmountInvested")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AmountReturned")
-                        .HasColumnType("int");
-
-                    b.Property<string>("HistoryText")
-                        .HasColumnType("text");
-
-                    b.Property<int>("InvestorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PendingReturns")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalInvestment")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("TransactionDate")
-                        .HasColumnType("datetime");
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
 
                     b.HasKey("Id");
 
-                    b.ToTable("TransactionHistorys");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("varchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("varchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("Investo.Models.Entities.Account", b =>
@@ -226,11 +468,99 @@ namespace Investo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Investo.Models.Entities.InvestmentType", b =>
+            modelBuilder.Entity("Investo.Models.Entities.BankDetail", b =>
                 {
                     b.HasOne("Investo.Models.Entities.Investor", "Investor")
-                        .WithMany("InvestmentTypes")
-                        .HasForeignKey("InvestorId1")
+                        .WithOne("BankDetails")
+                        .HasForeignKey("Investo.Models.Entities.BankDetail", "InvestorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Investo.Models.Entities.Investment", b =>
+                {
+                    b.HasOne("Investo.Models.Entities.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Investo.Models.Entities.Investor", "Investor")
+                        .WithMany("Investments")
+                        .HasForeignKey("InvestorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Investo.Models.Entities.Manager", "Manager")
+                        .WithMany()
+                        .HasForeignKey("ManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Investo.Models.Entities.Investor", b =>
+                {
+                    b.HasOne("Investo.Models.Entities.Manager", null)
+                        .WithMany("Investor")
+                        .HasForeignKey("ManagerId");
+                });
+
+            modelBuilder.Entity("Investo.Models.Entities.Manager", b =>
+                {
+                    b.HasOne("Investo.Models.Entities.Admin", "Admin")
+                        .WithMany()
+                        .HasForeignKey("Adminid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

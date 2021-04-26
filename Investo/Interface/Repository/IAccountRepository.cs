@@ -10,16 +10,10 @@ namespace Investo.Interface.Repository
 
         public bool Create(Account account);
 
-        public Account FindById(int id);
 
 
-        public Account Update(Account account);
 
-
-        public bool UpdateMultiple(List<Account> accounts);
-
-
-        public Account FindByAccountNumber(string accountNumber);
+        public Account FindByAccountNumber(string investorAccountNumber);
 
 
     }

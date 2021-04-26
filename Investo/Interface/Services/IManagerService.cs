@@ -7,15 +7,20 @@ namespace Investo.Interface.Services
     public interface IManagerService
     {
 
-        public bool CreateManager(string firstName, string middleName, string lastName, string email, string password, string checkPassword);
 
-        public Manager AddManager(IManagerService manager);
+        public Manager AddManager(Manager manager);
 
-        public Manager GetManager(int id);
+        public Manager Update(Manager manager);
+
+        public Manager Login(string username, string password);
 
         public List<Manager> GetAll();
 
-        public Manager UpdateManager(Manager manager);
+        public void DeleteManager(int id);
+
+        public Manager GetManager(int id);
+
+
 
     }
 }

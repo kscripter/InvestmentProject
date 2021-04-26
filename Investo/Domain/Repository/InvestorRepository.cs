@@ -19,21 +19,59 @@ namespace Investo.Domain.Repository
         }
 
 
-        public Investor UpdateInvestor(Investor investor)
+
+        public void DeleteInvestor(int id)
         {
-            _context.Investors.Update(investor);
+            var investor = _context.Investors.Find(id);
+            _context.Remove(investor);
+            _context.SaveChanges();
+        }
+
+
+
+        public Investor AddInvestor(Investor investor)
+        {
+            _context.Investors.Add(investor);
             _context.SaveChanges();
             return investor;
         }
 
+        public Investor FindByEmail(string email)
+        {
+            return _context.Investors.FirstOrDefault(e => e.Email == email);
+        }
+
+        public Investor FindById(int id)
+        {
+            return _context.Investors.FirstOrDefault(i => i.Id == id);
+        }
 
         public List<Investor> GetAll()
         {
             return _context.Investors.ToList();
         }
 
+        public Investor GetDetails(int id)
+        {
+            var investor = _context.Investors
+                .Where(ach => ach.Id == id)
+                .Include(ach => ach.Account).FirstOrDefault();
+            return investor;
+        }
+
+        public Investor GetInvestor(int id)
+        {
+            return _context.Investors.Find(id);
+        }
 
 
+
+        public Investor UpdateInvestor(Investor investor)
+        {
+            _context.Investors.Update(investor);
+            _context.SaveChanges();
+            return investor;
+        }
 
         public int CreateInvestor(Investor investor)
         {
@@ -45,74 +83,10 @@ namespace Investo.Domain.Repository
             }
             catch (Exception ea)
             {
-                Console.WriteLine($"err2: {ea.Message}");
+                Console.WriteLine($"error: {ea.Message}");
             }
-
             return 0;
-
         }
-
-
-        public Investor FindByEmail(string email)
-        {
-            var investor = _context.Investors
-            .Where(inv => inv.Email == email)
-            .Include(inv => inv.Account).FirstOrDefault();
-            return investor;
-        }
-
-
-
-        public Investor FindById(int id)
-        {
-            return _context.Investors.FirstOrDefault(i => i.Id == id);
-
-        }
-
-        public Investor Update(Investor investor)
-        {
-            _context.Investors.Update(investor);
-            _context.SaveChanges();
-            return investor;
-        }
-
-        public Investor GetDetails(int id)
-        {
-            var investor = _context.Investors
-                .Where(inv => inv.Id == id)
-                //.Include(h => h.History)
-                .Include(inv => inv.Account).FirstOrDefault();
-            return investor;
-        }
-
-
-        public void DeleteInvestor(int id)
-        {
-            var investor = _context.Investors.Find(id);
-            _context.Remove(investor);
-            _context.SaveChanges();
-        }
-
-        public Investor GetInvestor(int id)
-        {
-            return _context.Investors.Find(id);
-
-        }
-
-        public Investor AddInvestor(Investor investor)
-        {
-            throw new NotImplementedException();
-        }
-
-        //public Investor FindByHistory(int id)
-        //{
-        //    var accountHolder = _context.Investors
-        //     .Where(inv => inv.Id == id)
-        //        .Include(inv => inv.History).FirstOrDefault();
-        //    return accountHolder;
-        //}
-
-
     }
 
 

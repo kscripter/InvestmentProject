@@ -1,0 +1,249 @@
+﻿@model Investo.Models.Entities.Investor
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Investor</h4>
+<hr />
+
+
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+
+
+
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <fieldset>
+
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" placeholder="FirstName">
+            <span asp-validation-for="FirstName" class="form-text text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" placeholder="LastName">
+            <span asp-validation-for="LastName" class="form-text text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="MiddleName" class="control-label"></label>
+            <input asp-for="MiddleName" class="form-control" placeholder="MiddleName">
+            <span asp-validation-for="MiddleName" class="form-text text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" placeholder="Email">
+            <span asp-validation-for="Email" class="form-text text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="DateOfBirth" class="control-label"></label>
+            <input asp-for="DateOfBirth" class="form-control" placeholder="DateOfBirth">
+            <span asp-validation-for="DateOfBirth" class="form-text text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="PhoneNumber" class="control-label"></label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="PhoneNumber">
+            <span asp-validation-for="PhoneNumber" class="form-text text-danger"></span>
+        </div>
+
+
+
+        <div class="form-group">
+            <label asp-for="Address" class="control-label"></label>
+            <input asp-for="Address" class="form-control" placeholder="Address">
+            <span asp-validation-for="Address" class="form-text text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password" class="form-control" placeholder="Password">
+            <span asp-validation-for="Password" class="form-text text-danger"></span>
+        </div>
+
+
+        <fieldset class="form-group">
+            <legend>Investment Duration</legend>
+            <div class="form-check">
+                <label asp-for="InvestmentDuration" class="form-check-label">
+                    <input asp-for="InvestmentDuration" type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                    3 Months
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label asp-for="InvestmentDuration" class="form-check-label">
+                    <input asp-for="InvestmentDuration" type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+                    6 Months
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label asp-for="InvestmentDuration" class="form-check-label">
+                    <input asp-for="InvestmentDuration" type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+                    9 Months
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label asp-for="InvestmentDuration" class="form-check-label">
+                    <input asp-for="InvestmentDuration" type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios4" value="option4">
+                    12 Months
+                </label>
+            </div>
+            <span asp-validation-for="InvestmentDuration" class="form-text text-danger"></span>
+        </fieldset>
+
+
+
+
+        <fieldset class="form-group">
+            <legend>Investment Type</legend>
+
+            <div class="form-check">
+
+
+                <label asp-for="InvestmentType" class="form-check-label">
+                    <input asp-for="InvestmentType" type="radio" class="form-check-input" name="nvestType" id="investType" value="nvestType" checked="">
+                    Mini: 10% ROI/Month
+                    ....
+                    Min: #30,000
+                    Max: #100,000
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label asp-for="InvestmentType" class="form-check-label">
+                    <input asp-for="InvestmentType" type="radio" class="form-check-input" name="investType" id="investType" value="investType">
+                    Ruby: 20% ROI/Month
+                    ....
+                    Min: #150,000
+                    Max: #300,000
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label asp-for="InvestmentType" class="form-check-label">
+                    <input asp-for="InvestmentType" type="radio" class="form-check-input" name="investType" id="investType" value="investType">
+                    Silver: 30% ROI/Month
+                    ....
+                    Min: #330,000
+                    Max: #550,000
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label asp-for="InvestmentType" class="form-check-label">
+                    <input asp-for="InvestmentType" type="radio" class="form-check-input" name="investType" id="investType" value="investType">
+                    Gold: 40% ROI/Month
+                    ....
+                    Min: #580,000
+                    Max: #800,000
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label asp-for="InvestmentType" class="form-check-label">
+                    <input asp-for="InvestmentType" type="radio" class="form-check-input" name="investType" id="investType" value="option5">
+                    Royal: 50% ROI/Month
+                    ....
+                    Min: #1,000,000
+                    Max: #5,000,000
+                </label>
+            </div>
+            <span asp-validation-for="InvestmentType" class="form-text text-danger"></span>
+        </fieldset>
+
+
+        <div class="form-group">
+            <label asp-for="Photo" for="exampleInputFile">Upload Your Picture</label>
+            <input asp-for="Photo" type="file" class="form-control-file" id="uploadBox" aria-describedby="fileHelp">
+            <small id="fileHelp" class="form-text text-muted">Your picture should be in Jpeg format only not more than 100kb.</small>
+
+            @*class="custom-file-label"*@
+        </div>
+
+
+
+
+
+
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+
+        @*<button type="submit" class="btn btn-primary">Submit</button>*@
+    </fieldset>
+
+    @*@section Scripts{
+        <script>$(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                                            )
+            };</script>}*@
+
+
+</form>
+
+
+
+<div>
+    <a asp-action="Index"> <i class="fas fa-sign-out-alt"></i> &nbsp; Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

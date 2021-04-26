@@ -13,6 +13,15 @@
     <Folder Include="Interface\Services\" />
     <Folder Include="Models\ApplicationContext\" />
     <Folder Include="Models\Entities\" />
+    <Folder Include="Views\Investor\" />
+    <Folder Include="Views\Manager\" />
+    <Folder Include="Views\Investment\" />
+    <Folder Include="Views\Admin\" />
+    <Folder Include="wwwroot\fontawesome\" />
+    <Folder Include="Models\ViewModel\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Models\Enum\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.13" />
@@ -28,5 +37,14 @@
     <PackageReference Include="MySql.Data" Version="8.0.23" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="MySql.Data.EntityFramework" Version="8.0.23" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.13" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
   </ItemGroup>
 </Project>

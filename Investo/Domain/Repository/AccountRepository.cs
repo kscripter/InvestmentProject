@@ -18,39 +18,19 @@ namespace Investo.Domain.Repository
 
         }
 
-
         public bool Create(Account account)
         {
-
-
             _context.Accounts.Add(account);
             _context.SaveChanges();
             return true;
         }
 
-        public Account FindByAccountNumber(string accountNumber)
+
+        public Account FindByAccountNumber(string investorAccountNumber)
         {
-            return _context.Accounts.FirstOrDefault(ac => ac.AccountNumber == accountNumber);
+            return _context.Accounts.FirstOrDefault(ac => ac.InvestorAccountNumber == investorAccountNumber);
         }
 
-        public Account FindById(int id)
-        {
-            return _context.Accounts.FirstOrDefault(a => a.InvestorId == id);
-        }
-
-        public Account Update(Account account)
-        {
-            _context.Accounts.Update(account);
-            _context.SaveChanges();
-            return account;
-        }
-
-        public bool UpdateMultiple(List<Account> accounts)
-        {
-            _context.Accounts.UpdateRange(accounts);
-            _context.SaveChanges();
-            return true;
-        }
 
     }
 }

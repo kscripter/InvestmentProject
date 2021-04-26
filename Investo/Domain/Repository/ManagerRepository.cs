@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Investo.Interface.Repository;
 using Investo.Models.ApplicationContext;
 using Investo.Models.Entities;
@@ -19,49 +21,66 @@ namespace Investo.Domain.Repository
 
 
 
-        public Manager AddAccountManager(Manager manager)
+        public Manager AddManager(Manager manager)
         {
-            throw new NotImplementedException();
+            _context.Managers.Add(manager);
+            _context.SaveChanges();
+            return manager;
         }
 
         public int CreateManager(Manager manager)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Managers.Add(manager);
+                _context.SaveChanges();
+                return manager.Id;
+            }
+            catch (Exception x)
+            {
+                Console.WriteLine($"error: {x.Message}");
+            }
+            return manager.Id;
         }
 
         public void DeleteManager(int id)
         {
-            throw new NotImplementedException();
+            var manager = _context.Managers.Find(id);
+            _context.Remove(manager);
+            _context.SaveChanges();
         }
 
         public Manager FindByEmail(string email)
         {
-            throw new NotImplementedException();
+            return _context.Managers.FirstOrDefault(i => i.Email == email);
         }
 
         public Manager FindById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Managers.FirstOrDefault(i => i.Id == id);
         }
 
         public List<Manager> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Managers.ToList();
         }
 
         public Manager GetManager(int id)
         {
-            throw new NotImplementedException();
+            return _context.Managers.Find(id);
         }
 
         public Manager Update(Manager manager)
         {
-            throw new NotImplementedException();
+            _context.Managers.Update(manager);
+            _context.SaveChanges();
+            return manager;
         }
 
-        public Manager UpdateManager(Manager manager)
-        {
-            throw new NotImplementedException();
-        }
+
+
+
+
+
     }
 }
